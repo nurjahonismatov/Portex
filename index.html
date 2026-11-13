@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="system">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portex — Personal Profile & Resume Builder">
+  <title>Portex — Personal Profile & Resume Builder</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/themes.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/animations.css">
+  
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+  <div class="ambient-blob" aria-hidden="true"></div>
+
+  <div id="auth-screen" class="auth-screen hidden" data-mode="login"></div>
+  <div id="lock-screen" class="auth-screen hidden"></div>
+  
+  <div class="app">
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+    
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-logo">
+          <i data-lucide="layers"></i>
+        </div>
+        <span class="sidebar-brand">Portex</span>
+      </div>
+      
+      <nav class="sidebar-nav">
+        <button class="nav-item active" data-section="dashboard">
+          <i data-lucide="layout-dashboard"></i>
+          <span data-i18n="nav.dashboard">Dashboard</span>
+        </button>
+        <button class="nav-item" data-section="profile">
+          <i data-lucide="user"></i>
+          <span data-i18n="nav.profile">My Profile</span>
+        </button>
+        <button class="nav-item" data-section="education">
+          <i data-lucide="graduation-cap"></i>
+          <span data-i18n="nav.education">Education</span>
+        </button>
+        <button class="nav-item" data-section="achievements">
+          <i data-lucide="award"></i>
+          <span data-i18n="nav.achievements">Achievements</span>
+        </button>
+        <button class="nav-item" data-section="skills">
+          <i data-lucide="sparkles"></i>
+          <span data-i18n="nav.skills">Skills & Languages</span>
+        </button>
+        <button class="nav-item" data-section="experience">
+          <i data-lucide="briefcase"></i>
+          <span data-i18n="nav.experience">Experience</span>
+        </button>
+        <button class="nav-item" data-section="projects">
+          <i data-lucide="folder-kanban"></i>
+          <span data-i18n="nav.projects">Projects</span>
+        </button>
+        <button class="nav-item" data-section="vault">
+          <i data-lucide="key-round"></i>
+          <span data-i18n="nav.vault">Accounts</span>
+        </button>
+        <button class="nav-item" data-section="resume">
+          <i data-lucide="file-text"></i>
+          <span data-i18n="nav.resume">My Resume</span>
+        </button>
+        <button class="nav-item" data-section="about">
+          <i data-lucide="info"></i>
+          <span data-i18n="nav.about">About</span>
+        </button>
+        <button class="nav-item" data-section="contact">
+          <i data-lucide="phone"></i>
+          <span data-i18n="nav.contact">Contact</span>
+        </button>
+        <button class="nav-item" data-section="settings">
+          <i data-lucide="database"></i>
+          <span data-i18n="nav.settings">Data</span>
+        </button>
+      </nav>
+      
+      <div class="sidebar-footer">
+        <div class="user-card">
+          <div class="user-avatar" id="sidebar-user-avatar">
+            <i data-lucide="user"></i>
+          </div>
+          <div class="user-info">
+            <div class="user-name" id="sidebar-user-name">Portex</div>
+            <div class="user-title" id="sidebar-user-title">Personal Profile</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+    
+    <div class="main">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="menu-toggle" id="menu-toggle" aria-label="Menu">
+            <i data-lucide="menu"></i>
+          </button>
+          <h1 class="page-title" id="page-title">Dashboard</h1>
+        </div>
+        <div class="topbar-right">
+          <!-- Theme toggle -->
+          <div class="top-control" id="theme-control" role="group" aria-label="Theme">
+            <button type="button" class="top-control-btn" data-theme="light" title="Light">
+              <i data-lucide="sun"></i>
+              <span data-i18n="settings.light">Light</span>
+            </button>
+            <button type="button" class="top-control-btn" data-theme="dark" title="Dark">
+              <i data-lucide="moon"></i>
+              <span data-i18n="settings.dark">Dark</span>
+            </button>
+            <button type="button" class="top-control-btn" data-theme="system" title="System">
+              <i data-lucide="monitor"></i>
+              <span data-i18n="settings.system">System</span>
+            </button>
+          </div>
+          <!-- Language -->
+          <div class="lang-select-wrap">
+            <select class="lang-select" id="lang-select" aria-label="Language">
+              <option value="en">English</option>
+              <option value="uz">O'zbek</option>
+              <option value="ru">Русский</option>
+            </select>
+          </div>
+        </div>
+      </header>
+      
+      <main class="content">
+        <section class="section active" id="section-dashboard">
+          <div id="dashboard-content"></div>
+        </section>
+        
+        <section class="section" id="section-profile">
+          <div class="section-header">
+            <h2 class="section-title" data-i18n="profile.title">My Profile</h2>
+            <p class="section-subtitle" data-i18n="profile.subtitle">Manage your personal information</p>
+          </div>
+          <div id="profile-content"></div>
+        </section>
+        
+        <section class="section" id="section-education">
+          <div class="section-header">
+            <h2 class="section-title" data-i18n="education.title">Education</h2>
+            <p class="section-subtitle" data-i18n="education.subtitle">Add your educational background</p>
+          </div>
+          <div id="education-content"></div>
+        </section>
+        
+        <section class="section" id="section-achievements">
+          <div class="section-header">
+            <h2 class="section-title" data-i18n="achievements.title">Achievements</h2>
+            <p class="section-subtitle" data-i18n="achievements.subtitle">Showcase your accomplishments</p>
+          </div>
+          <div id="achievements-content"></div>
+        </section>
+        
+        <section class="section" id="section-skills">
+          <div class="section-header">
+            <h2 class="section-title" data-i18n="skills.title">Skills & Languages</h2>
+            <p class="section-subtitle" data-i18n="skills.subtitle">Add your skills and language proficiency</p>
+          </div>
+          <div id="skills-content"></div>
+        </section>
+        
+        <section class="section" id="section-experience">
+          <div class="section-header">
+            <h2 class="section-title" data-i18n="experience.title">Experience</h2>
+            <p class="section-subtitle" data-i18n="experience.subtitle">Add your professional experience</p>
+          </div>
+          <div id="experience-content"></div>
+        </section>
+        
+        <section class="section" id="section-projects">
+          <div class="section-header">
+            <h2 class="section-title" data-i18n="projects.title">Projects</h2>
+            <p class="section-subtitle" data-i18n="projects.subtitle">Your portfolio projects</p>
+          </div>
+          <div id="projects-content"></div>
+        </section>
+        
+        <section class="section" id="section-vault">
+          <div class="section-header">
+            <h2 class="section-title" data-i18n="vault.title">My Accounts</h2>
+            <p class="section-subtitle" data-i18n="vault.subtitle">Saved emails and passwords</p>
+          </div>
+          <div id="vault-content"></div>
+        </section>
+
+        <section class="section" id="section-resume">
+          <div class="section-header">
+            <h2 class="section-title" data-i18n="resume.title">My Resume</h2>
+            <p class="section-subtitle" data-i18n="resume.subtitle">Preview and download your professional resume</p>
+          </div>
+          <div id="resume-content"></div>
+        </section>
+        
+        <section class="section" id="section-contact">
+          <div class="section-header">
+            <h2 class="section-title" data-i18n="contact.title">Contact</h2>
+            <p class="section-subtitle" data-i18n="contact.subtitle">Get in touch</p>
+          </div>
+          <div id="contact-content"></div>
+        </section>
+
+        <section class="section" id="section-about">
+          <div class="section-header">
+            <h2 class="section-title" data-i18n="about.title">About</h2>
+            <p class="section-subtitle" data-i18n="about.subtitle">Learn more about MyProfile</p>
+          </div>
+          <div id="about-content"></div>
+        </section>
+        
+        <section class="section" id="section-settings">
+          <div class="section-header">
+            <h2 class="section-title" data-i18n="settings.title">Data</h2>
+            <p class="section-subtitle" data-i18n="settings.subtitle">Export, import or clear your data</p>
+          </div>
+          <div id="settings-content"></div>
+        </section>
+      </main>
+    </div>
+  </div>
+  
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal" id="modal">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modal-title">Modal</h3>
+        <button class="modal-close" onclick="App.closeModal()" aria-label="Close">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+      <div class="modal-body" id="modal-body"></div>
+      <div class="modal-footer" id="modal-footer"></div>
+    </div>
+  </div>
+  
+  <div class="toast-container" id="toast-container"></div>
+  
+  <script src="js/storage.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/validation.js"></script>
+  <script src="js/language.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="js/profile.js"></script>
+  <script src="js/education.js"></script>
+  <script src="js/achievements.js"></script>
+  <script src="js/skills.js"></script>
+  <script src="js/experience.js"></script>
+  <script src="js/projects.js"></script>
+  <script src="js/vault.js"></script>
+  <script src="js/contact.js"></script>
+  <script src="js/resume.js"></script>
+  <script src="js/settings.js"></script>
+  <script src="js/export.js"></script>
+  <script src="js/about.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

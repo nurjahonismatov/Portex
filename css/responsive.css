@@ -1,0 +1,242 @@
+@media (max-width: 1024px) {
+  .grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .grid-3,
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-features {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .content {
+    padding: 20px;
+  }
+  
+  .resume-paper {
+    width: 100%;
+    min-height: auto;
+    padding: 32px;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    transform: translateX(-100%);
+  }
+  
+  .sidebar.open {
+    transform: translateX(0);
+  }
+  
+  .main {
+    margin-left: 0;
+  }
+  
+  .menu-toggle {
+    display: flex;
+  }
+  
+  .content {
+    padding: 16px;
+  }
+  
+  .topbar {
+    padding: 0 12px;
+  }
+  
+  .page-title {
+    font-size: 1.05rem;
+  }
+  
+  .topbar-right {
+    gap: 6px;
+  }
+  
+  .top-control-btn span {
+    display: none;
+  }
+  
+  .top-control-btn {
+    padding: 8px;
+  }
+  
+  .lang-select {
+    padding: 8px 28px 8px 10px;
+    font-size: 0.75rem;
+    max-width: 90px;
+  }
+  
+  .grid-2,
+  .grid-3,
+  .grid-4,
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-features {
+    grid-template-columns: 1fr;
+  }
+  
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+  
+  .welcome-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 24px;
+  }
+  
+  .welcome-text h2 {
+    font-size: 1.25rem;
+  }
+  
+  .quick-actions {
+    justify-content: center;
+  }
+  
+  .stat-card {
+    padding: 16px;
+  }
+  
+  .section-title {
+    font-size: 1.25rem;
+  }
+  
+  .item-card {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .item-actions {
+    align-self: flex-end;
+  }
+  
+  .settings-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  
+  .resume-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .template-switcher {
+    width: 100%;
+  }
+  
+  .template-btn {
+    flex: 1;
+    text-align: center;
+  }
+  
+  .resume-preview-wrapper {
+    padding: 12px;
+  }
+  
+  .resume-paper {
+    padding: 24px 20px;
+    font-size: 0.875rem;
+  }
+  
+  .resume-modern .resume-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .resume-modern .resume-contact {
+    justify-content: center;
+  }
+  
+  .resume-modern .resume-item-header {
+    flex-direction: column;
+    gap: 2px;
+  }
+  
+  .modal {
+    max-width: 100%;
+    margin: 0;
+    border-radius: var(--radius) var(--radius) 0 0;
+    max-height: 85vh;
+  }
+  
+  .modal-overlay {
+    align-items: flex-end;
+    padding: 0;
+  }
+  
+  .photo-upload {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .toast-container {
+    left: 16px;
+    right: 16px;
+    top: 16px;
+  }
+  
+  .toast {
+    min-width: auto;
+    max-width: none;
+  }
+  
+  .about-hero {
+    padding: 28px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .btn {
+    padding: 10px 14px;
+  }
+  
+  .welcome-card {
+    padding: 20px;
+  }
+  
+  .card {
+    padding: 16px;
+  }
+  
+  .badge-list {
+    gap: 8px;
+  }
+  
+  .skill-badge {
+    font-size: 0.8125rem;
+    padding: 6px 12px;
+  }
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  
+  .resume-paper,
+  .resume-paper * {
+    visibility: visible;
+  }
+  
+  .resume-paper {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    box-shadow: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+}
